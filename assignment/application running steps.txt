@@ -1,0 +1,46 @@
+
+Running steps of the application : 
+----------------------------------
+
+	Open terminal or command propmt.
+	And in terminal go at your activemq bin directory. 
+	And here execute 'activemq start' command for terminal and 'activemq.bat start' command for command propmt.
+	After then activemq will be start and you can check at http://localhost:8161/admin url (By default,ActiveMQ Web Console will be available here)
+	When you hit http://localhost:8161/admin url then a propmt will open and ask for credentials.
+	For see the activemq console you have to insert Username: admin and Password: admin , this is default credentials.
+
+	After then run your java application by main class.
+
+
+Working of the classes :
+---------------------------------------
+
+ProducerConsumerApp.java : 
+
+	This java class is a main class which is loads the broker URL (default broker url is tcp://localhost:61616) and queue name
+	from a properties file.
+	And initializes a MessageQueue instance with the broker URL and queue name.
+	ProducerConsumerApp clas uses ExecutorService to start the Producer and Consumer.
+	
+	
+Producer.java : 
+	
+	Producer class connects to the ActiveMQ broker and starts sending messages to the queue.
+
+	This class sends number of text messages (as configured) and logs each sent messages.
+	and also updates the Tracker to increment the success count for each successful message.
+	If an error occurs, the Tracker increments the failure count.
+	
+	
+Consumer.java : 
+ 
+	Consumer class connects to the ActiveMQ broker and starts consuming messages from the queue.
+	and also logs each received message.
+	
+	
+Tracker.java :
+
+	Tracker class logs the total number of successful and failed messages when the application shuts down.
+
+	In this application there is also two properties files first config.properties file for store the properties.
+	and second is logging.properties file for store the messages and exception in a log file.
